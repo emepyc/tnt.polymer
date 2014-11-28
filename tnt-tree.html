@@ -1,0 +1,28 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<!-- TODO : Load via html-imports to ensure dedup -->
+<link rel="stylesheet" href="http://emepyc.github.io/tnt/v0/tnt.css" type="text/css" />
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://emepyc.github.io/tnt/v0/tnt.min.js"></script>
+<script src="theme.js"></script>
+
+<polymer-element name="tnt-tree" attributes="newick scale">
+  <template>
+    <div id="mytree"></div>
+  </template>
+
+  <script>
+    Polymer({
+    ready : function() {
+      var tree_vis = tnt.tree()
+         .data(tnt.tree.parse_newick(this.attributes.newick.value));
+    tree_vis.layout().scale(false);
+    <!-- tree_vis -->
+    <!--      .layout(tree_vis.layout().scale(this.attributes.scale.value === "false" ? false : true)); -->
+    console.log(tree_vis.layout().scale());
+      var theme = tnt_theme();
+      theme(tree_vis, this.shadowRoot.getElementById("mytree"));
+     }
+    });
+  </script>
+</polymer-element>
