@@ -1,0 +1,83 @@
+<!-- <link rel="import" href="bower_components/polymer/polymer.html"> -->
+<link rel="import" href="http://www.polymer-project.org/components/polymer/polymer.html">
+
+<!-- TODO : Load via html-imports to ensure dedup -->
+<link rel="stylesheet" href="http://emepyc.github.io/tnt/v0/tnt.css" type="text/css" />
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://emepyc.github.io/tnt/v0/tnt.min.js"></script>
+<script src="theme.js"></script>
+
+
+<polymer-element name="tnt-tree" attributes="newick scale">
+  <template>
+    <div id="mytree"></div>
+  </template>
+  <script>
+    Polymer("tnt-tree", {
+      scale : false,
+      ready : function() {
+        var polymer = this;
+        var tree_vis = tnt.tree()
+          .data(tnt.tree.parse_newick(this.attributes.newick.value))
+          .on_click(function (node) {
+            info_obj = {
+              name : node.node_name(),
+              id   : node.id(),
+              length : node.branch_length()
+            };
+            polymer.fire("core-signal", {name : "clickednode", data : info_obj});
+          });
+        var theme = tnt_theme()
+          .scale(this.attributes.scale.value);
+        theme(tree_vis, this.shadowRoot.getElementById("mytree"));
+      }
+    });
+  </script>
+</polymer-element>
+
+<polymer-element name="node-info" attributes="info">
+  <template>
+    <style>
+      /* These rules only apply to elements inside node-info web component */
+      table {
+        width : 180px;
+        border : 3px solid black;
+        border-collapse : collapse;
+      }
+      th {
+        border : 2px solid gray;
+      }
+      td {
+        border : 1px solid grey;
+      }
+    </style>
+    <core-signals on-core-signal-clickednode="{{react}}"></core-signals>
+    <table>
+      <tr>
+	<th colspan=2>Name: {{info.name}}</th>
+      </tr>
+      <tr>
+	<td>ID</td>
+	<td>{{info.id}}</td>
+      </tr>
+      <tr>
+	<td>Length</td>
+	<td>{{info.length}}</td>
+      </tr>
+    </table>
+  </template>
+  <script>
+    Polymer("node-info", {
+      created : function() {
+        this.info = {
+          name : "",
+          id : "",
+          length : undefined
+        };
+      },
+      react : function (e, detail, sender) {
+        this.info = detail
+      }
+    });
+  </script>
+</polymer-element>

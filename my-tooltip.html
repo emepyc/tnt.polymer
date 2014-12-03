@@ -1,0 +1,31 @@
+<!-- <link rel="import" href="http://www.polymer-project.org/components/polymer/polymer.html"> -->
+<link rel="import" href="bower-components/polymer/polymer.html">
+
+<!-- TODO : Load via html-imports to ensure dedup -->
+<link rel="stylesheet" href="http://emepyc.github.io/tnt/v0/tnt.css" type="text/css" />
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://emepyc.github.io/tnt/v0/tnt.min.js"></script>
+
+<polymer-element name="tnt-tooltip">
+  <template>
+    <style>
+      polyfill-next-selector { content: '.card-header h3'; }
+      .card-header ::content h3 {
+      margin: 0;
+      font-size: 1.8em;
+      font-weight: 300;
+      }
+      polyfill-next-selector { content: '.card-header div'; }
+      .card-header ::content div {
+      width: 70px;
+      border-radius: 50%;
+      margin: 10px;
+      }
+    </style>
+    <content select="h3"></content>
+    <content select="div"></content>
+  </template>
+  <script>
+    Polymer({});
+  </script>
+</polymer-element>

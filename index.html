@@ -6,49 +6,33 @@
 
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <!-- <script src="http://www.polymer-project.org/webcomponents.js"></script> -->
-    <!-- <link rel="import" href="http://www.polymer-project.org/components/polymer/polymer.html"> -->
+    <script src="http://www.polymer-project.org/webcomponents.js"></script>
+    <link rel="import" href="http://www.polymer-project.org/components/font-roboto/roboto.html">
+    <link rel="import" href="http://www.polymer-project.org/components/core-signals/core-signals.html">
 
-    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-    <link rel="import" href="bower_components/font-roboto/roboto.html">
-    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
-    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">    <link rel="import" href="tnt-tree.html">
+    <!-- <script src="bower_components/webcomponentsjs/webcomponents.js"></script> -->
+    <!-- <link rel="import" href="bower_components/font-roboto/roboto.html"> -->
+    <!-- <link rel="import" href="bower_components/core-header-panel/core-header-panel.html"> -->
+    <!-- <link rel="import" href="bower_components/core-toolbar/core-toolbar.html"> -->
+    <!-- <link rel="import" href="bower_components/core-signals/core-signals.html"> -->
+    
+    <link rel="import" href="tnt-tree-info.html">
+    <!-- <link rel="import" href="tnt-tree.html"> -->
+    <!-- <link rel="import" href="my-tooltip.html"> -->
 
     <style>
-      html,body {
-        height: 100%;
-        margin: 0;
-        background-color: #E5E5E5;
-        font-family: 'RobotoDraft', sans-serif;
-      }
-
       .container {
         width: 90%;
         margin: 50px auto;
-      }
-
-      core-header-panel {
-         height: 50px;
-         overflow: auto;
-         -webkit-overflow-scrolling: touch;
-      }
-
-      core-toolbar {
-        background: #03a9f4;
-        color: white;
       }
     </style>
 
   </head>
 
   <body unresolved>
-    <core-header-panel>
-      <core-toolbar>
-	Hi!
-      </core-toolbar>
-    </core-header-panel>
     <div class="container">
-      <tnt-tree newick="((human, chimp), mouse)" scale="false"></tnt-tree>
+      <tnt-tree id="tree" newick="((human:0.13, chimp:0.15)primates:0.3, mouse:1)vertebrates:0.13" scale="false"></tnt-tree>
+      <node-info></node-info>
     </div>
   </body>
 </html>
